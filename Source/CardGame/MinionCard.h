@@ -29,4 +29,7 @@ public:
 
 	UPROPERTY(editanywhere)
 	unsigned int Belief;
+
+	UPROPERTY(editanywhere)
+	unsigned int BeliefAcuity;
 };

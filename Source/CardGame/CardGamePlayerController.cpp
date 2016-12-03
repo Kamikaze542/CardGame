@@ -10,6 +10,13 @@ ACardGamePlayerController::ACardGamePlayerController()
 	m_CurrentMana = 0;
 }
 
+void ACardGamePlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+	FInputModeGameAndUI iM;
+	SetInputMode(iM);
+}
+
 unsigned int ACardGamePlayerController::GetMaxMana()
 {
 	return m_MaxMana;
