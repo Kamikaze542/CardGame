@@ -3,10 +3,11 @@
 #pragma once
 
 #include "GameFramework/GameMode.h"
+#include "CardGameGameModeBase.h"
 #include "WidgetGameMode.generated.h"
 
 UCLASS()
-class CARDGAME_API AWidgetGameMode : public AGameMode
+class CARDGAME_API AWidgetGameMode : public ACardGameGameModeBase
 {
 	GENERATED_UCLASS_BODY()
 };

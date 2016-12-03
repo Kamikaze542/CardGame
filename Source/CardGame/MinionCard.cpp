@@ -10,6 +10,7 @@ AMinionCard::AMinionCard()
 	PrimaryActorTick.bCanEverTick = true;
 	Luck = 1;
 	Belief = 1;
+	BeliefAcuity = 2.5f;
 }
 
 void AMinionCard::BeginPlay()
@@ -30,6 +31,7 @@ void AMinionCard::Play()
 		AMinion* minion = (AMinion*)GetWorld()->SpawnActor<AMinion>();
 		minion->SetLuck(Luck);
 		minion->SetBelief(Belief);
+		minion->SetBeliefAcuity(BeliefAcuity);
 	}
 }
 

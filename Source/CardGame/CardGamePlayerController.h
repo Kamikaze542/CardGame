@@ -16,6 +16,8 @@ class CARDGAME_API ACardGamePlayerController : public APlayerController
 public:
 	ACardGamePlayerController();
 
+	virtual void BeginPlay() override;
+
 	unsigned int GetMaxMana();
 	unsigned int GetCurrentMana();
 	void SetCurrentMana(unsigned int mana);
