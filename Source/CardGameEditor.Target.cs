@@ -20,6 +20,7 @@ public class CardGameEditorTarget : TargetRules
 		ref List<string> OutExtraModuleNames
 		)
 	{
-		OutExtraModuleNames.AddRange( new string[] { "CardGame" } );
-	}
+		OutExtraModuleNames.AddRange( new string[] { "CardGame"} );
+        OutExtraModuleNames.Add("LoadingCardGame");
+    }
 }

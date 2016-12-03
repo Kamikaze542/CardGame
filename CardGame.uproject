@@ -4,14 +4,22 @@
 	"Category": "",
 	"Description": "",
 	"Modules": [
-		{
-			"Name": "CardGame",
+    {
+      "Name": "CardGame",
+      "Type": "Runtime",
+      "LoadingPhase": "Default",
+      "AdditionalDependencies": [
+        "Engine"
+      ]
+    },
+    {
+      "Name": "LoadingCardGame",
 			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"AdditionalDependencies": [
-				"Engine"
-			]
-		}
+      "LoadingPhase": "PreLoadingScreen",
+            "AdditionalDependencies": [
+        "Engine"
+      ]
+    }
 	],
 	"Plugins": [
 		{

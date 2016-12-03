@@ -21,5 +21,6 @@ public class CardGameTarget : TargetRules
 		)
 	{
 		OutExtraModuleNames.AddRange( new string[] { "CardGame" } );
+        OutExtraModuleNames.Add("LoadingCardGame");
 	}
 }
