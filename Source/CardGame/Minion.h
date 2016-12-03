@@ -25,7 +25,10 @@ public:
 
 	void SetLuck(unsigned int Luck);
 	void SetBelief(unsigned int Belief);
+
+	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
 private:
 	unsigned int m_Luck;
 	unsigned int m_Belief;

@@ -11,9 +11,8 @@ AMinion::AMinion()
 	PrimaryActorTick.bCanEverTick = true;
     sphere_Collider = CreateDefaultSubobject<USphereComponent>(TEXT("SphereCollider"));
 	sphere_Collider->SetupAttachment(RootComponent);
+	sphere_Collider->SetSphereRadius(100.f, true);
 	sphere_Collider->OnComponentBeginOverlap.AddDynamic(this, &AMinion::OnOverlapBegin);
-	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &AMinion::OnOverlapBegin);
-	//GetCapsuleComponent()->OnComponentHit.AddDynamic(this, &AMinion::OnOverlapBegin);
 	m_Luck = 1;
 	m_Belief = 1;
 	m_speed = 1000.f;
@@ -57,10 +56,11 @@ void AMinion::SetBelief(unsigned int Belief)
 
 void AMinion::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	 GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Some debug message!"));
-	if (OtherActor == this)
+	 GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("Some debug message!"));
+	if (OtherActor->ActorHasTag("Minion"))
 	{
 		m_speed = 0.0f;
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Some debug message!"));
 	}
 }
 
