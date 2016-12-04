@@ -5,4 +5,14 @@
 #include "Engine.h"
 #include "UnrealNetwork.h"
 #include "Online.h"
+#include "MyGameResources.h"
 
+class FCardGameGameModule : public FDefaultGameModuleImpl
+{
+public:
+	void StartupModule();
+	void ShutdownModule();
+	TSharedPtr<FSlateGameResources> GetSlateGameResources();
+protected:
+	FMyUIResources MyUIResources;
+};

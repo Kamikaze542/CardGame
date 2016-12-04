@@ -8,5 +8,6 @@ AWidgetGameMode::AWidgetGameMode(const class FObjectInitializer& ObjectInitializ
 	: Super(ObjectInitializer)
 {
 
-	HUDClass = AMainMenuHUD::StaticClass();
+	HUDClass = ACardGameHUD::StaticClass();
+	
 }

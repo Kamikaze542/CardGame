@@ -93,7 +93,6 @@ void UCardGameGameInstance::OnCreateSessionComplete(FName SessionName, bool bWas
 	}
 }
 
-
 void UCardGameGameInstance::OnStartOnlineGameComplete(FName SessionName, bool bWasSuccessful)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, FString::Printf(TEXT("OnStartSessionComplete %s, %d"), *SessionName.ToString(), bWasSuccessful));

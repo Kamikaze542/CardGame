@@ -1,27 +1,29 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #include "CardGame.h"
 #include "MenuStyles.h" 
 
-//Custom implementation of the Default Game Module. 
-class FCardGameGameModule : public FDefaultGameModuleImpl
-{
-	// Called whenever the module is starting up. In here, we unregister any style sets 
-	// (which may have been added by other modules) sharing our 
-	// style set's name, then initialize our style set. 
-	virtual void StartupModule() override
+ 
+IMPLEMENT_PRIMARY_GAME_MODULE(FCardGameGameModule, CardGame, "CardGame");
+
+	void FCardGameGameModule::StartupModule()
 	{
 		//Hot reload hack
 		FSlateStyleRegistry::UnRegisterSlateStyle(FMenuStyles::GetStyleSetName());
 		FMenuStyles::Initialize();
+		MyUIResources.Initialize();
 	}
 
-	// Called whenever the module is shutting down. Here, we simply tell our MenuStyles to shut down.
-	virtual void ShutdownModule() override
+	void FCardGameGameModule::ShutdownModule()
 	{
 		FMenuStyles::Shutdown();
+		MyUIResources.Shutdown();
 	}
 
-};
+	TSharedPtr<FSlateGameResources> FCardGameGameModule::GetSlateGameResources()
+	{
+		/*Give caller a pointer to our FSlateGameResources*/
+		/*Giving strong pointer, helps gurantee access to resources*/
+		return MyUIResources.GetSlateGameResources();
+	}
 
-IMPLEMENT_PRIMARY_GAME_MODULE( FCardGameGameModule, CardGame, "CardGame" );
+
+
