@@ -13,7 +13,9 @@ class CARDGAME_API ACardGameGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 	
-	
+public:
+	virtual void PostLogin(APlayerController* NewPlayer) override;
+private:
 	
 	
 };

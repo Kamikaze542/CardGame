@@ -15,6 +15,10 @@ void ACardGamePlayerController::BeginPlay()
 	Super::BeginPlay();
 	FInputModeGameAndUI iM;
 	SetInputMode(iM);
+	SetIgnoreLookInput(true);
+	SetIgnoreMoveInput(true);
+	
+	GEngine->AddOnScreenDebugMessage(-1, 1000.f, FColor::Red, FString::Printf(TEXT("PCSpawnTransformInfo: %s, %s"), *this->GetActorTransform().GetLocation().ToString(), *this->GetActorTransform().GetRotation().Rotator().ToString()));
 }
 
 unsigned int ACardGamePlayerController::GetMaxMana()
