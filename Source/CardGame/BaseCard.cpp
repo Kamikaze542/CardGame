@@ -17,6 +17,7 @@ void ABaseCard::BeginPlay()
 {
 	Super::BeginPlay();
 	playerController = Cast<ACardGamePlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+	m_team1 = playerController->GetP1();
 }
 
 // Called every frame

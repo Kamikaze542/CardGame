@@ -23,10 +23,12 @@ public:
 	unsigned int GetLuck();
 	unsigned int GetBelief();
 	float GetBeliefAcuity();
+	bool GetTeam1();
 
 	void SetLuck(unsigned int Luck);
 	void SetBelief(unsigned int Belief);
 	void SetBeliefAcuity(float BA);
+	void SetTeam1(bool team1);
 
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
@@ -43,8 +45,14 @@ private:
 	float m_BeliefAcuity;
 	float m_elapsedTime = 0.0f;
 	float m_speedHolder;
+
+	UPROPERTY(EditAnywhere)
+	bool m_team1;
+
 	USkeletalMesh* skeletal_Mesh;
 	AMinion* m_otherMinion;
+	AMinion* m_teamCheck;
+	TArray<AMinion*> m_otherMinions;
 
 	UPROPERTY(EditAnywhere)
 	USphereComponent* sphere_Collider;

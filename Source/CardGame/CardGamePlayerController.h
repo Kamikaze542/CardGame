@@ -20,9 +20,12 @@ public:
 
 	unsigned int GetMaxMana();
 	unsigned int GetCurrentMana();
+	bool GetP1();
 	void SetCurrentMana(unsigned int mana);
+	void SetP1(bool player1);
 	
 private:
 	unsigned int m_MaxMana;
 	unsigned int m_CurrentMana;
+	bool m_p1;
 };

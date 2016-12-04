@@ -31,7 +31,17 @@ unsigned int ACardGamePlayerController::GetCurrentMana()
 	return m_CurrentMana;
 }
 
+bool ACardGamePlayerController::GetP1()
+{
+	return m_p1;
+}
+
 void ACardGamePlayerController::SetCurrentMana(unsigned int mana)
 {
 	m_CurrentMana = mana;
+}
+
+void ACardGamePlayerController::SetP1(bool player1)
+{
+	m_p1 = player1;
 }

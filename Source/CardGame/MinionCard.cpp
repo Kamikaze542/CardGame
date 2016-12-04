@@ -32,6 +32,7 @@ void AMinionCard::Play()
 		minion->SetLuck(Luck);
 		minion->SetBelief(Belief);
 		minion->SetBeliefAcuity(BeliefAcuity);
+		minion->SetTeam1(m_team1);
 	}
 }
 

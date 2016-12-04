@@ -16,6 +16,5 @@ class CARDGAME_API ACardGameGameModeBase : public AGameModeBase
 public:
 	virtual void PostLogin(APlayerController* NewPlayer) override;
 private:
-	
-	
+	TArray<APlayerController*> PlayerList;
 };

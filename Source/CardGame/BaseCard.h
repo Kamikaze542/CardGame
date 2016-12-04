@@ -31,5 +31,6 @@ public:
 protected:
 	unsigned int m_ManaCost;
 	FString m_CardName;
+	bool m_team1;
 	
 };

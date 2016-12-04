@@ -19,6 +19,7 @@ AMinion::AMinion()
 	m_BeliefAcuity = 2.5f;
 	m_speed = 1000.f;
 	m_inRange = false;
+	m_team1 = true;
 }
 
 
@@ -65,6 +66,11 @@ float AMinion::GetBeliefAcuity()
 	return m_BeliefAcuity;
 }
 
+bool AMinion::GetTeam1()
+{
+	return m_team1;
+}
+
 void AMinion::SetLuck(unsigned int Luck)
 {
 	m_Luck = Luck;
@@ -80,13 +86,29 @@ void AMinion::SetBeliefAcuity(float BA)
 	m_BeliefAcuity = BA;
 }
 
+void AMinion::SetTeam1(bool team1)
+{
+	m_team1 = team1;
+}
+
 void AMinion::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if (OtherActor->ActorHasTag("Minion"))
 	{
-		m_speedHolder = m_speed;
+		m_teamCheck = (AMinion*)OtherActor;
+		if (m_teamCheck->m_team1 == this->m_team1)
+		{
+			m_teamCheck = nullptr;
+			return;
+		}
+		m_teamCheck = nullptr;
+		if (m_otherMinions.Num() == 0)
+		{
+			m_speedHolder = m_speed;
+		}
 		m_speed = 0.0f;
-		m_otherMinion = (AMinion*)OtherActor;
+		m_otherMinions.Add((AMinion*)OtherActor);
+		m_otherMinion = m_otherMinions[0];
 		m_inRange = true;
 	}
 }
@@ -95,9 +117,31 @@ void AMinion::OnOverlapEnd(UPrimitiveComponent * OverlappedComp, AActor * OtherA
 {
 	if (OtherActor->ActorHasTag("Minion"))
 	{
-		m_inRange = false;
+		m_teamCheck = (AMinion*)OtherActor;
+		if (m_teamCheck->m_team1 == this->m_team1)
+		{
+			m_teamCheck = nullptr;
+			return;
+		}
+		m_teamCheck = nullptr;
 		m_elapsedTime = 0.0f;
-		m_speed = m_speedHolder;
+		if (m_otherMinions.Num() > 1)
+		{
+			m_otherMinions.RemoveAt(0);
+			m_otherMinion = m_otherMinions[0];
+		}
+		else if (m_otherMinions.Num() == 1)
+		{
+			m_inRange = false;
+			m_otherMinions.RemoveAt(0);
+			m_otherMinion = nullptr;
+			m_speed = m_speedHolder;
+		}
+		else
+		{
+			m_inRange = false;
+			m_speed = m_speedHolder;
+		}
 	}
 }
 
