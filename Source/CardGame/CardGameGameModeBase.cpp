@@ -40,14 +40,15 @@ void ACardGameGameModeBase::PostLogin(APlayerController* NewPlayer)
 
 void ACardGameGameModeBase::SpawnCard(UClass* card, FVector loc, bool isPlayer1)
 {
-	AMinion* itemBase = GetWorld()->SpawnActor<AMinion>(card, loc, FRotator::ZeroRotator);
+	FRotator r = isPlayer1 ? FRotator(0.f, 180.f, 0.f) : FRotator(0.f, 0.f, 0.f);
+	AMinion* itemBase = GetWorld()->SpawnActor<AMinion>(card, loc, r);
 
-	//isPlayer1 ? FRotator(0.f, 0.f, 0.f) : FRotator(0.f, 180.f, 0.f);
+	
 	itemBase->SetLuck(10);
 	itemBase->SetBelief(100);
-	itemBase->SetBeliefAcuity(10.f);
+	itemBase->SetBeliefAcuity(2.5f);
 	itemBase->SetTeam1(isPlayer1);
-	//itemBase->SetActorLocation(loc);
-
+	//itemBase->bSimGravityDisabled = false;
+	//itemBase->GetCapsuleComponent()->SetSimulatePhysics(true);
 	GEngine->AddOnScreenDebugMessage(-1, 1000.f, FColor::Red, FString::Printf(TEXT("LOL")));
 }

@@ -46,6 +46,9 @@ public:
 	UFUNCTION(Server, Reliable, WithValidation)
 	void PlayCardNetwork(ECardName cardPlayed, FVector location);
 
+	UFUNCTION(BlueprintCallable, Category = "Card")
+	void CardClicked(int cardnum);
+
 	void SetupInputComponent();
 	
 	bool GetP1();

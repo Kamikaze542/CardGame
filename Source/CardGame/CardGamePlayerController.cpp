@@ -92,30 +92,75 @@ void ACardGamePlayerController::PerformRaycast()
 	//}
 	
 	
-	FVector StartTrace = this->GetActorTransform().GetLocation();
-	FVector ForwardVector = this->GetActorForwardVector();
-	FVector EndTrace = ((ForwardVector * 50000.f) + StartTrace);
-	
-	
-	GEngine->AddOnScreenDebugMessage(-1, 1000.f, FColor::Red, FString::Printf(TEXT("Debug thing Working!: %s, %s"), *StartTrace.ToString(), *ForwardVector.ToString(), *EndTrace.ToString()));
-	FCollisionQueryParams* TraceParams = new FCollisionQueryParams();
-
-	//GEngine->AddOnScreenDebugMessage(-1, 1000.f, FColor::Red, FString::Printf(TEXT("Camera location : %s, %s") ));
-	//FVector StartTrace = this->PlayerCameraManager->GetTransformComponent()->GetComponentLocation();
-	//FVector ForwardVector = this->PlayerCameraManager->GetTransformComponent()->GetForwardVector();
+	//FVector StartTrace = this->GetActorTransform().GetLocation();
+	//FVector ForwardVector = this->GetActorForwardVector();
 	//FVector EndTrace = ((ForwardVector * 50000.f) + StartTrace);
+	//
+	//
+	//GEngine->AddOnScreenDebugMessage(-1, 1000.f, FColor::Red, FString::Printf(TEXT("Debug thing Working!: %s, %s"), *StartTrace.ToString(), *ForwardVector.ToString(), *EndTrace.ToString()));
 	//FCollisionQueryParams* TraceParams = new FCollisionQueryParams();
-    
-	if (GetWorld()->LineTraceSingleByChannel(*HitResult, StartTrace, EndTrace, ECC_Visibility, *TraceParams))
+
+	////GEngine->AddOnScreenDebugMessage(-1, 1000.f, FColor::Red, FString::Printf(TEXT("Camera location : %s, %s") ));
+	////FVector StartTrace = this->PlayerCameraManager->GetTransformComponent()->GetComponentLocation();
+	////FVector ForwardVector = this->PlayerCameraManager->GetTransformComponent()->GetForwardVector();
+	////FVector EndTrace = ((ForwardVector * 50000.f) + StartTrace);
+	////FCollisionQueryParams* TraceParams = new FCollisionQueryParams();
+ //   
+	//if (GetWorld()->LineTraceSingleByChannel(*HitResult, StartTrace, EndTrace, ECC_Visibility, *TraceParams))
+	//{
+	//	DrawDebugLine(GetWorld(), StartTrace, EndTrace, FColor(255, 0, 0), true);	
+	//	GEngine->AddOnScreenDebugMessage(-1, 1000.f, FColor::Red, FString::Printf(TEXT("Hit something %s, %s"), *HitResult->Actor->GetName()));
+	//	ECardName card = ECardName::SMALL_MINION;
+	//	FVector* v = new FVector(1000.f,0.f,400.f);
+	//	PlayCardNetwork(card, *v);
+
+	//}
+
+
+
+}
+
+void ACardGamePlayerController::CardClicked(int theCard)
+{
+	ECardName card;
+	FVector* v;
+	switch (theCard)
 	{
-		DrawDebugLine(GetWorld(), StartTrace, EndTrace, FColor(255, 0, 0), true);	
-		GEngine->AddOnScreenDebugMessage(-1, 1000.f, FColor::Red, FString::Printf(TEXT("Hit something %s, %s"), *HitResult->Actor->GetName()));
-		ECardName card = ECardName::SMALL_MINION;
-		FVector* v = new FVector(1000.f,0.f,400.f);
-		PlayCardNetwork(card, *v);
+	case 0:
+		card = ECardName::SMALL_MINION;
+		v = new FVector(m_p1?  500.f : 2300.f, 1000.f, 600.f);
+		break;
+		
+	case 1:
+		card = ECardName::MEDIUM_MINION;
+		v = new FVector(m_p1 ? 500.f : 2300.f, 500.f, 400.f);
+		break;
 
+	case 2:
+		card = ECardName::LARGE_MINION;
+		v = new FVector(m_p1 ? 500.f : 2300.f, 0.f, 400.f);
+		break;
+
+	case 3:
+		card = ECardName::FIRE_SPELL;
+		v = new FVector(1400.f, 500.f, 400.f);
+		break;
+
+	case 4:
+		card = ECardName::ICE_SPELL;
+		v = new FVector(1400.f, 500.f, 400.f);
+		break;
+
+	case 5:
+		card = ECardName::POISON_SPELL;
+		v = new FVector(1400.f, 500.f, 400.f);
+		break;
+	default:
+		card = ECardName::SMALL_MINION;
+		v = new FVector(m_p1 ? 500.f : 2300.f, 0.f, 400.f);
+		break;
 	}
-
-
-
+	
+	
+	PlayCardNetwork(card, *v);
 }
