@@ -8,6 +8,8 @@
 /**
  * 
  */
+
+
 UCLASS()
 class CARDGAME_API ACardGameGameModeBase : public AGameModeBase
 {
@@ -15,6 +17,7 @@ class CARDGAME_API ACardGameGameModeBase : public AGameModeBase
 	
 public:
 	virtual void PostLogin(APlayerController* NewPlayer) override;
+	void SpawnCard(UClass* card, FVector loc, bool isPlayer1);
 private:
 	TArray<APlayerController*> PlayerList;
 };

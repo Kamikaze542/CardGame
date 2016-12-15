@@ -40,5 +40,5 @@ public:
 	unsigned int DamageValue;
 
 	UPROPERTY(editanywhere)
-	FVector AOESize;
+	float AOERadius;
 };
