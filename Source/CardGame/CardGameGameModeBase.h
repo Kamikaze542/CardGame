@@ -17,7 +17,7 @@ class CARDGAME_API ACardGameGameModeBase : public AGameModeBase
 	
 public:
 	virtual void PostLogin(APlayerController* NewPlayer) override;
-	void SpawnCard(UClass* card, FVector loc, bool isPlayer1);
+	void SpawnCard(UClass* card, FVector loc, bool isPlayer1, int werbad);
 private:
 	TArray<APlayerController*> PlayerList;
 };

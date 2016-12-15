@@ -38,7 +38,12 @@ public:
 	unsigned int GetMaxMana();
 	unsigned int GetCurrentMana();
 	AMinion* add_Minion;
-	UClass* m_thatMinion;
+	UClass* m_sMinion;
+	UClass* m_mMinion;
+	UClass* m_lMinion;
+	UClass* m_fSpell;
+	UClass* m_pSpell;
+	UClass* m_iSpell;
 
 	
 	void PlayCard(ECardName cardPlayed, FVector location);

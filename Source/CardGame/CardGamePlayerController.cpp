@@ -7,8 +7,18 @@
 
 ACardGamePlayerController::ACardGamePlayerController()
 {
-	static ConstructorHelpers::FObjectFinder<UBlueprint> theminion(TEXT("Blueprint'/Game/C++ClassExtensions/SmallMinion.SmallMinion'")); 
-	m_thatMinion = (UClass*)theminion.Object->GeneratedClass;
+	static ConstructorHelpers::FObjectFinder<UBlueprint> sMinion(TEXT("Blueprint'/Game/C++ClassExtensions/SmallMinion.SmallMinion'")); 
+	static ConstructorHelpers::FObjectFinder<UBlueprint> mMinion(TEXT("Blueprint'/Game/C++ClassExtensions/MediumMinion.MediumMinion'"));
+	static ConstructorHelpers::FObjectFinder<UBlueprint> lMinion(TEXT("Blueprint'/Game/C++ClassExtensions/LargeMinion.LargeMinion'"));
+	static ConstructorHelpers::FObjectFinder<UBlueprint> fSpell(TEXT("Blueprint'/Game/C++ClassExtensions/SmallMinion.SmallMinion'"));
+	static ConstructorHelpers::FObjectFinder<UBlueprint> pSpell(TEXT("Blueprint'/Game/C++ClassExtensions/SmallMinion.SmallMinion'"));
+	static ConstructorHelpers::FObjectFinder<UBlueprint> iSpell(TEXT("Blueprint'/Game/C++ClassExtensions/SmallMinion.SmallMinion'"));
+	m_sMinion = (UClass*)sMinion.Object->GeneratedClass;
+	m_mMinion = (UClass*)mMinion.Object->GeneratedClass;
+	m_lMinion = (UClass*)lMinion.Object->GeneratedClass;
+	m_fSpell = (UClass*)fSpell.Object->GeneratedClass;
+	m_pSpell = (UClass*)pSpell.Object->GeneratedClass;
+	m_iSpell = (UClass*)iSpell.Object->GeneratedClass;
 	m_MaxMana = 100;
 	m_CurrentMana = 0;
 	bReplicates = true;
@@ -62,8 +72,35 @@ void ACardGamePlayerController::SetP1(bool player1)
 
 void ACardGamePlayerController::PlayCard(ECardName cardPlayed, FVector location)
 {
+	UClass* createdMinion = m_sMinion;
+	int minionIndex = (int)cardPlayed;
+	switch (cardPlayed)
+	{
+	case ECardName::SMALL_MINION:
+		createdMinion = m_sMinion;
+		break;
+	case ECardName::MEDIUM_MINION:
+		createdMinion = m_mMinion;
+		break;
+	case ECardName::LARGE_MINION:
+		createdMinion = m_lMinion;
+		break;
+	case ECardName::FIRE_SPELL:
+		createdMinion = m_fSpell;
+		break;
+	case ECardName::POISON_SPELL:
+		createdMinion = m_pSpell;
+		break;
+	case ECardName::ICE_SPELL:
+		createdMinion = m_iSpell;
+		break;
+	case ECardName::COUNT:
+		break;
+	default:
+		break;
+	}
 	gm = (ACardGameGameModeBase*)GetWorld()->GetAuthGameMode();
-	gm->SpawnCard(m_thatMinion, location, m_p1);
+	gm->SpawnCard(createdMinion, location, m_p1, minionIndex);
 }
 void ACardGamePlayerController::PlayCardNetwork_Implementation(ECardName cardPlayed, FVector location)
 {
@@ -128,17 +165,17 @@ void ACardGamePlayerController::CardClicked(int theCard)
 	{
 	case 0:
 		card = ECardName::SMALL_MINION;
-		v = new FVector(m_p1?  500.f : 2300.f, 1000.f, 600.f);
+		v = new FVector(2300.f, 500.f, 400.f);
 		break;
 		
 	case 1:
 		card = ECardName::MEDIUM_MINION;
-		v = new FVector(m_p1 ? 500.f : 2300.f, 500.f, 400.f);
+		v = new FVector(2300.f, 500.f, 400.f);
 		break;
 
 	case 2:
 		card = ECardName::LARGE_MINION;
-		v = new FVector(m_p1 ? 500.f : 2300.f, 0.f, 400.f);
+		v = new FVector(2300.f, 500.f, 400.f);
 		break;
 
 	case 3:
@@ -157,7 +194,7 @@ void ACardGamePlayerController::CardClicked(int theCard)
 		break;
 	default:
 		card = ECardName::SMALL_MINION;
-		v = new FVector(m_p1 ? 500.f : 2300.f, 0.f, 400.f);
+		v = new FVector(m_p1 ? 500.f : 2300.f, 500.f, 400.f);
 		break;
 	}
 	
