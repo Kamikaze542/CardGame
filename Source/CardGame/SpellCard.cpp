@@ -25,7 +25,7 @@ void ASpellCard::Play()
 	{
 		ASpell* spell = (ASpell*)GetWorld()->SpawnActor<ASpell>();
 		spell->SetDamageValue(DamageValue);
-		spell->SetAOESize(AOESize);
+		spell->SetAOERadius(AOERadius);
 		switch (DamageType)
 		{
 		case EDamageType::fire:

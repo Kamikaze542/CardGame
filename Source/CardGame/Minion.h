@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameFramework/Character.h"
+#include "Base.h"
 #include "Minion.generated.h"
 
 UCLASS()
@@ -51,6 +52,7 @@ private:
 
 	USkeletalMesh* skeletal_Mesh;
 	AMinion* m_otherMinion;
+	ABase* m_otherBase;
 	AMinion* m_teamCheck;
 	TArray<AMinion*> m_otherMinions;
 

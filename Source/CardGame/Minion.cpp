@@ -42,7 +42,14 @@ void AMinion::Tick( float DeltaTime )
 	}
 	if (m_elapsedTime >= m_BeliefAcuity)
 	{
-		m_otherMinion->SetLuck(m_otherMinion->GetLuck() - m_Belief);
+		if (m_otherMinion != nullptr)
+		{
+			m_otherMinion->SetLuck(m_otherMinion->GetLuck() - m_Belief);
+		}
+		else if(m_otherBase != nullptr)
+		{
+			m_otherBase->SetCurrentHealth(m_otherBase->GetCurrentHealth() - m_Belief);
+		}
 		m_elapsedTime = 0.0f;
 	}
 	if (m_Luck <= 0)
@@ -110,6 +117,14 @@ void AMinion::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherA
 		m_otherMinions.Add((AMinion*)OtherActor);
 		m_otherMinion = m_otherMinions[0];
 		m_inRange = true;
+	}
+	if (OtherActor->ActorHasTag("Base"))
+	{
+		m_otherBase = (ABase*)OtherActor;
+		if (m_otherBase->GetTeam1() != this->m_team1)
+		{
+			m_inRange = true;
+		}
 	}
 }
 
