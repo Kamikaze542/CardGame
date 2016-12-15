@@ -48,7 +48,7 @@ private:
 	float m_speedHolder;
 
 	UPROPERTY(EditAnywhere)
-	bool m_team1;
+	bool m_team;
 
 	USkeletalMesh* skeletal_Mesh;
 	AMinion* m_otherMinion;
