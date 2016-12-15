@@ -13,10 +13,12 @@ ASpell::ASpell()
 	m_SphereCollider->SetupAttachment(RootComponent);
 	m_SphereCollider->OnComponentBeginOverlap.AddDynamic(this, &ASpell::OnOverlapBegin);
 	m_SphereCollider->OnComponentEndOverlap.AddDynamic(this, &ASpell::OnOverlapEnd);
+	GetCapsuleComponent()->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Overlap);
+	GetCapsuleComponent()->SetEnableGravity(false);
 	m_AOERadius = 100.f;
 	m_DamageValue = 50.f;
 	m_causesStatusEffect = true;
-
+	m_SlowFactor = 2.f;
 }
 
 // Called when the game starts or when spawned
@@ -66,7 +68,7 @@ void ASpell::OnOverlapBegin(UPrimitiveComponent * OverlappedComp, AActor * Other
 		}
 		if (m_causesStatusEffect)
 		{
-			m_CollidingMinion->SetBeliefAcuity(m_CollidingMinion->GetBelief() / m_SlowFactor);
+			m_CollidingMinion->SetBeliefAcuity(m_CollidingMinion->GetBeliefAcuity() / m_SlowFactor);
 		}
 
 		m_CollidingMinion = nullptr;
@@ -89,7 +91,7 @@ void ASpell::OnOverlapEnd(UPrimitiveComponent * OverlappedComp, AActor * OtherAc
 		}
 		if (m_causesStatusEffect)
 		{
-			m_CollidingMinion->SetBeliefAcuity(m_CollidingMinion->GetBelief() * m_SlowFactor);
+			m_CollidingMinion->SetBeliefAcuity(m_CollidingMinion->GetBeliefAcuity() * m_SlowFactor);
 		}
 
 		m_CollidingMinion = nullptr;
